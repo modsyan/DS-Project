@@ -8,6 +8,6 @@ public:
     Stack();
     bool isEmpty();
     void push(char word);
-    void pop();
+    int pop();
     char peek();
 };

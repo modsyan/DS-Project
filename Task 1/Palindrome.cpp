@@ -1,44 +1,57 @@
 #include "Palindrome.h"
 #include <iostream>
 using namespace std;
-class Node
+
+struct Node
 {
-public:
     char data;
-    Node *next;
-    Node()
-    {
-        data = 'b';
-        next = NULL;
-    }
+    Node *next = NULL;
 };
+
 class Stack
 {
 public:
     Node *top;
+
     Stack()
     {
         top = NULL;
     }
+
     bool isEmpty()
     {
-        return (top == NULL);
+        return top == NULL;
     }
+
     void push(char l)
     {
         Node *newWord = new Node;
         newWord->data = l;
+
         if (isEmpty())
         {
             top = newWord;
         }
         else
         {
-
             newWord->next = top;
             top = newWord;
         }
     }
+
+    int pop()
+    {
+        if (isEmpty())
+            return -1;
+        else
+        {
+            Node *tmp = top;
+            top = top->next;
+            delete tmp;
+            return top->data;
+        }
+    }
+
     void display()
     {
         Node *temp = top;
@@ -49,21 +62,9 @@ public:
         }
         cout << endl;
     }
+
     char peek()
     {
         return top->data;
-    }
-    void pop()
-    {
-        if (isEmpty())
-        {
-            cout << "Nothing here " << endl;
-        }
-        else
-        {
-            Node *temp = top;
-            temp = temp->next;
-            delete top;
-        }
     }
 };
