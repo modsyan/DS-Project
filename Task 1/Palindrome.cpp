@@ -1,76 +1,46 @@
-#include "Palindrome.h"
 #include <iostream>
+#include "Palindrome.h"
 using namespace std;
 
-struct Node
+Stack::Stack()
 {
-    char data;
-    Node *next = NULL;
-};
+    top = NULL;
+}
 
-class Stack
+bool Stack::isEmpty()
 {
-public:
-    Node *top;
+    return top == NULL;
+}
 
-    Stack()
+void Stack::push(char l)
+{
+    Node *newWord = new Node;
+    newWord->data = l;
+
+    if (isEmpty())
     {
-        top = NULL;
+        top = newWord;
     }
-
-    bool isEmpty()
+    else
     {
-        return top == NULL;
+        newWord->next = top;
+        top = newWord;
     }
+}
 
-    void push(char l)
+int Stack::pop()
+{
+    if (isEmpty())
+        return -1;
+    else
     {
-        Node *newWord = new Node;
-        newWord->data = l;
-
-        if (isEmpty())
-        {
-            top = newWord;
-        }
-        else
-        {
-            newWord->next = top;
-            top = newWord;
-        }
+        Node *tmp = top;
+        top = top->next;
+        delete tmp;
     }
+}
 
-    int pop()
-    {
-        if (isEmpty())
-            return -1;
-        else
-        {
-            Node *tmp = top;
-            top = top->next;
-            delete tmp;
-            return top->data;
-        }
-    }
-
-    void display()
-    {
-        Node *temp = top;
-        while (temp != NULL)
-        {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
-    }
-
-    void pushWord(Stack stack, string s)
-    {
-        for (int i = 0; i < s.size(); i++)
-            stack.push(s[i]);
-    }
-
-    char peek()
-    {
-        return top->data;
-    }
-};
+char peek()
+{
+    return top->data;
+}
