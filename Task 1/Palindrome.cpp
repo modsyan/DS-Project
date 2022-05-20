@@ -63,6 +63,12 @@ public:
         cout << endl;
     }
 
+    void pushWord(Stack stack, string s)
+    {
+        for (int i = 0; i < s.size(); i++)
+            stack.push(s[i]);
+    }
+
     char peek()
     {
         return top->data;
