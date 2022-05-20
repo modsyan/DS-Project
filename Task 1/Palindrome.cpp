@@ -40,7 +40,7 @@ int Stack::pop()
     }
 }
 
-char peek()
+char Stack::peek()
 {
     return top->data;
 }
