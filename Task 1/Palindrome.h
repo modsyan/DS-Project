@@ -10,4 +10,5 @@ public:
     void push(char word);
     int pop();
     char peek();
+    void pushWord(Stack stack, string s);
 };
