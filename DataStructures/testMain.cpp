@@ -8,5 +8,5 @@ int main()
     lnk.pushBack(4);
     lnk.pushBack(4);
     lnk.pushBack(4);
-    // lnk.diplay();
+    lnk.diplay();
 }

@@ -5,8 +5,8 @@ template <class T>
 struct Node
 {
     T data;
-    Node<T> *next;
-    Node<T> *prev;
+    Node<T> *next = NULL;
+    Node<T> *prev = NULL;
 };
 
 template <class T>
@@ -26,7 +26,7 @@ public:
         Node<T> *newnode = new Node<T>;
         newnode->data = value;
         
-        if (head == NULL)
+        if (!head)
             head = tail = newnode;
         else {
             tail->next = newnode;
@@ -39,6 +39,7 @@ public:
     {
         Node<T> *newNode = new Node<T>;
         newNode->data = value;
+
         if (head != NULL)
         {
             head->prev = newNode;
@@ -49,15 +50,17 @@ public:
 
     void diplay()
     {
-        if (head == NULL)
+
+        // cout << head->data;
+        if (!head)
             cout << "Is empty\n";
         else
         {
-            Node<T> *temp = head;
-            while (temp != NULL)
+            Node<T> *cur = head;
+            while(cur != NULL)
             {
-                cout << temp->data << " ";
-                temp = temp->next;
+                cout << cur->data << " ";
+                cur = cur->next;
             }
         }
     }
