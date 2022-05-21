@@ -48,10 +48,12 @@ public:
         head = newNode;
     }
 
+    void insertAtPositoin(T val, int index) {
+
+    }
+
     void diplay()
     {
-
-        // cout << head->data;
         if (!head)
             cout << "Is empty\n";
         else
@@ -65,9 +67,29 @@ public:
         }
     }
 
-    // bool isFound(T value);
+    bool isFound(T value)
+    {
+        Node<T> *cur = head;
+        while (cur)
+        {
+            if (cur->data == value)
+                return 1;
+            cur = cur->next;
+        }
+        return 0;
+    }
+
+    T atPosition(int index) 
+    {
+        if(!head)
+            return -1;
+        Node<T> *cur = head;
+        while(index--)
+            cur = cur->next;
+        return cur->data;
+    }
+
     // int size();
-    // void insertFirst(T value);
     //     void insertbefore(int item, T value);
     // bool isempty();
     // void diplay();
@@ -89,18 +111,6 @@ public:
 //     return head;
 // }
 
-// template <typename T>
-// bool LinkedList<T>::isFound(T value)
-// {
-//     Node<T> *temp = head;
-//     while (!temp)
-//     {
-//         if (temp->data == value)
-//             return 1;
-//         temp = temp->next;
-//     }
-//     return 0;
-// }
 
 // template <typename T>
 // int LinkedList<T>::size()
