@@ -13,4 +13,5 @@ int main()
     lnk.diplay();
     cout << "\n";
     cout << lnk.atPosition(0);
+    cout << lnk.size();
 }

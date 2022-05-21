@@ -89,39 +89,32 @@ public:
         return cur->data;
     }
 
-    // int size();
-    //     void insertbefore(int item, T value);
-    // bool isempty();
-    // void diplay();
+    bool isempty()
+    {
+        return head;
+    }
+
+    int size()
+    {
+        if (!head)
+            return 0;
+            
+        Node<T> *temp = head;
+        int cnt = 0;
+        while (temp)
+        {
+            temp = temp->next;
+            cnt++;
+        }
+        return cnt;
+    }
+
+    //void insertbefore(int item, T value);
     // void deleteFirst();
     // void deleteByValue(T value);
     // void deleteByIndex(int index);
 
 
-// template <class T>
-// LinkedList<T>::LinkedList<T>()
-// {
-//     LinkedList<T>::head = NULL;
-//     LinkedList<T>::tail = NULL;
-// }
-
-// template <typename T>
-// bool LinkedList<T>::isempty()
-// {
-//     return head;
-// }
-
-
-// template <typename T>
-// int LinkedList<T>::size()
-// {
-//     if (!head)
-//         return 0;
-//     int cnt = 0;
-//     Node<T> *temp = head;
-//     while (temp) { temp = temp->next; cnt++;}
-//     return cnt;
-// }
 
 
 // template <typename T>
