@@ -1,150 +1,112 @@
 #include <iostream>
 using namespace std;
 
-class Node  
+template <class T>
+class Node
 {
 public:
-    int data;
-    Node * next;
-    Node()
-    {
-        data = 0;
-        next = NULL;
-    }
+    T data;
+    Node<T>* next = NULL;
 };
 
+template <class T>
 class Queue
 {
 public:
-    Node *front;
-    Node *rear;
+    Node<T> *front;
+    Node<T> *rear;
+    int size = -1;
 
-    Queue()
+    Queue<T>()
     {
         front = rear = NULL;
     }
 
     bool isEmpty()
     {
-        return (front == NULL);
+        return !front;
     }
 
-    void disPlay()
+// for testing
+    int display()
     {
-        if (isEmpty())
-            cout << "The list is Empty" << endl;
-        else
+        if (!front)
+            return -1;
+        Node<T> *cur = front;
+        while(cur)
         {
-            Node *temp = front;
-            while(temp != NULL)
-            {
-                cout << temp->data << " ";
-                temp = temp->next;
-            }
-            cout << endl;
+            cout << cur->data << " ";
+            cur = cur->next;
         }
+        cout << endl;
     }
 
-    void enQueue(int value)
+    void enQueue(T value)
     {
-        Node *newnode = new Node;
+        Node<T> *newnode = new Node<T>;
         newnode->data = value;
-        if (isEmpty())
+
+        if (!front)
             front = rear = newnode;
         else
         {
             rear->next = newnode;
             rear = newnode;
         }
+        size++;
     }
 
-    void deQueue()
+    int deQueue()
     {
-        if(isEmpty())
-            cout << "The list is Empty Now" << endl;
-        else if (front == rear)
+        if (!front)
+            return 0;
+        size--;
+        if (front == rear)
         {
             delete front;
             front = rear = NULL;
-            cout << "The first elemet had deleted.. " << endl;
-            disPlay();
+            return 1;
         }
-        else
-        {
-            Node *temp = front;
-            front = front->next;
-            delete temp;
-            cout << "The first elemet had deleted.. " << endl;
-            disPlay();
-        }
+        Node<T> *tmp = front;
+        front = front->next;
+        delete tmp;
+        return 1;
     }
 
-    int getFront()
+    T Front()
     {
         return front->data;
     }
 
-    int getRear()
+    T Rear()
     {
         return rear->data;
     }
-int counter()
+
+    int Size()
     {
-        if(isEmpty())
-            cout << "The list is empty.." << endl;
-        else
-        {
-            int count = 0;
-            Node *temp = front;
-            while (temp != NULL)
-            {
-                count++;
-                temp = temp->next;
-            }
-            return count;
-        }
+        return size;
     }
 
-    bool isFound(int value)
+    int clear()
     {
-        Node* temp = front;
-        while (temp != NULL)
-        {
-            if (temp->data == value)
-                return true;
-            else
-                temp = temp->next;
-        }
-        return false;
-    }
-
-    void clear()
-    {
-        if (isEmpty())
-            cout << "The list is aready empty.." << endl;
-        else
-        {
-            while (!isEmpty())
-            {
-                deQueue();
-            }
-        }
+        if (!front)
+            return 0;
+        while (front)
+            deQueue();
+        return 1;
     }
 };
 
 int main()
 {
-    int item;
-    Queue q;
+    string item;
+    Queue<string> q;
     for (int i = 0; i < 5; i++)
     {
         cout << "Enter the Item to enQueue: ";
-        cin >>
-            item;
+        cin >> item;
         q.enQueue(item);
     }
-    q.disPlay();
-
-    q.clear();
-    q.clear();
+    q.display();
 }

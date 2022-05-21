@@ -190,6 +190,18 @@ public:
             cout << endl;
         }
     }
+    // bool isFound(int value)
+    // {
+    //     Node *temp = front;
+    //     while (temp != NULL)
+    //     {
+    //         if (temp->data == value)
+    //             return true;
+    //         else
+    //             temp = temp->next;
+    //     }
+    //     return false;
+    // }
 };
 
 int main()
