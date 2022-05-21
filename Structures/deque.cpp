@@ -1,27 +1,19 @@
 #include <iostream>
 using namespace std;
-// push_back (done)
-// push_front (done)
-// pop_front (done)
-// pop_back
-// getback (done)
-// getfront (done)
-// erase (done)
-// clear (done)
-// isempty (done)
-// search (done)
-// display (done)
+
 class Node
 {
 public:
     int data;
     Node *next;
+    Node *prev;
     Node()
     {
         data = 0;
         next = NULL;
     }
 };
+
 class Deque
 {
 public:
@@ -31,11 +23,11 @@ public:
     {
         head = tail = NULL;
     }
-
     bool isEmpty()
     {
         return head == NULL;
     }
+
     void pushFront(int item)
     {
         Node *newitem = new Node;
@@ -43,14 +35,16 @@ public:
         if (isEmpty())
         {
             head = tail = newitem;
+            newitem->next = newitem->prev = NULL;
         }
         else
         {
+            head->prev = newitem;
             newitem->next = head;
             head = newitem;
+            head->prev = NULL;
         }
     }
-
     void pushBack(int item)
     {
         Node *newitem = new Node;
@@ -58,26 +52,14 @@ public:
         if (isEmpty())
         {
             head = tail = newitem;
+            newitem->next = newitem->prev = NULL;
         }
         else
         {
             tail->next = newitem;
+            newitem->prev = tail;
             tail = newitem;
-        }
-    }
-    void disPlay()
-    {
-        if (isEmpty())
-            cout << "The list is Empty" << endl;
-        else
-        {
-            Node *temp = head;
-            while (temp != NULL)
-            {
-                cout << temp->data << " ";
-                temp = temp->next;
-            }
-            cout << endl;
+            tail->prev = NULL;
         }
     }
     int getFront()
@@ -103,26 +85,71 @@ public:
         {
             Node *temp = head;
             head = head->next;
+            head->prev = NULL;
             delete temp;
         }
     }
     void popBack()
     {
+
         if (isEmpty())
         {
-            cout << "Nothing here" << endl;
+
+            cout << "Nothing here ";
         }
+
         else if (head == tail)
         {
-            delete head;
-            head = tail = NULL;
+            delete tail;
+            tail = head = NULL;
         }
         else
         {
-            Node *temp = head;
+            Node *temp = tail;
+            tail = tail->prev;
+            tail->next = NULL;
+            delete temp;
         }
     }
 
+    void erase(int item)
+    {
+        Node *temp;
+        if (isEmpty())
+        {
+            cout << "empty list";
+        }
+        else if (head->data == item)
+        {
+            popFront();
+        }
+        else
+        {
+            temp = head->next;
+            while (temp != NULL)
+            {
+                if (temp->data == item)
+                    break;
+                temp = temp->next;
+            }
+        }
+
+        if (temp == NULL)
+        {
+            cout << "item not found" << endl;
+        }
+        else if (temp->next == NULL)
+        {
+            popBack();
+        }
+        else
+        {
+
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+            delete temp;
+        }
+    }
     void clear()
     {
         if (isEmpty())
@@ -148,29 +175,19 @@ public:
         }
         return false;
     }
-    void erase(int item)
+    void display()
     {
-        Node *delptr = head;
         if (isEmpty())
-        {
-            cout << "List is empty , no items to delete \n";
-        }
-        else if (head->data == item)
-        {
-            head = head->next;
-            delete delptr;
-        }
+            cout << "The list is Empty" << endl;
         else
         {
-            Node *prev = NULL;
-            delptr = head;
-            while (delptr->data != item)
+            Node *temp = head;
+            while (temp != NULL)
             {
-                prev = delptr;
-                delptr = delptr->next;
+                cout << temp->data << " ";
+                temp = temp->next;
             }
-            prev->next = delptr->next;
-            delete delptr;
+            cout << endl;
         }
     }
 };
@@ -181,11 +198,16 @@ int main()
     Deque q;
     q.pushFront(4);
     q.pushFront(3);
+    q.pushFront(2);
+    q.display();
     q.pushBack(5);
     q.pushBack(6);
-    q.disPlay();
-    q.erase(4);
-    q.disPlay();
+    q.pushBack(7);
+    q.display();
     q.popBack();
-    q.disPlay();
+    q.display();
+    q.erase(5);
+    q.display();
+
+    return 0;
 }
