@@ -68,7 +68,7 @@ public:
         return 1;
     }
 
-    void diplay()
+    void display()
     {
         if (!head)
             cout << "Is empty\n";
@@ -83,7 +83,7 @@ public:
         }
     }
 
-    void rDiplay()
+    void rDisplay()
     {
         if (!tail)
             cout << "Is empty\n";
@@ -130,7 +130,7 @@ public:
 
     bool isEmpty()
     {
-        return head;
+        return !head;
     }
 
     int size()
@@ -202,5 +202,4 @@ public:
     {   
         return deleteByIndex(search(value));
     }
-
 };
