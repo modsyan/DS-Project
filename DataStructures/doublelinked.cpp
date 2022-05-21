@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class doublylinkedlist
+class DoubleLinkedList
 {
 
 public:
@@ -12,6 +12,7 @@ public:
         Node *next;
         Node *prev;
     };
+
     Node *first, *last;
     int length;
 
