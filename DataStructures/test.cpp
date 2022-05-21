@@ -3,5 +3,6 @@
 using namespace std;
 int main()
 {
-    queue<int> q;
+    cout << (char)102;
 }
+" 3213213  "
