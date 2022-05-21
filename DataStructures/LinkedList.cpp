@@ -48,8 +48,20 @@ public:
         head = newNode;
     }
 
-    void insertAtPositoin(T val, int index) {
-
+    int insertAtPositoin(T val, int index) 
+    {
+        if(index < 0 || index > size())
+            return 0;
+        Node<T> *itt = head;
+        Node<T> *newNode = new Node<T>;
+        newNode->data = val;
+        // index -= 1;
+        while(index--)
+            itt = itt->next;
+        newNode->next = itt->next;
+        itt->next = newNode;
+        newNode->prev = itt;
+        newNode->next->prev = newNode;
     }
 
     void diplay()
@@ -117,8 +129,8 @@ public:
 
 
 
-// template <typename T>
-// void LinkedList<T>::insertbefore(int item, T value)
+
+    // void insertbefore(int item, T value)
 // {
 //     if (isempty())
 //         insertFirst(value);
