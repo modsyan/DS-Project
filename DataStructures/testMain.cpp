@@ -14,6 +14,16 @@ int main()
     cout << endl;
     lnk.insertAtPositoin(2, 0);
     lnk.diplay();
+    cout << endl;
+    lnk.insertAtPositoin(2, 1);
+    lnk.diplay();
+    cout << endl;
+    lnk.rDiplay();
+    cout << endl;
+    cout << lnk.atPosition(-1);
+    cout << endl;
+    cout << lnk.search(1);
+
     // cout << "\n";
     // cout << lnk.atPosition(0);
     // cout << lnk.size();
