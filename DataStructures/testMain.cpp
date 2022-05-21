@@ -23,6 +23,23 @@ int main()
     cout << lnk.atPosition(-1);
     cout << endl;
     cout << lnk.search(1);
+    cout << endl << lnk.pop() << endl;
+    lnk.diplay();
+    cout << endl << lnk.popBack() << endl;
+    lnk.diplay();
+
+    cout << endl << lnk.deleteByIndex(0) << endl;
+    lnk.diplay();
+    cout << endl;
+
+    lnk.deleteByIndex(2);
+    lnk.diplay();
+    cout << endl;
+    lnk.pushBack(10);
+    lnk.diplay();
+    cout << endl;
+    lnk.deleteByValue(10);
+    lnk.diplay();
 
     // cout << "\n";
     // cout << lnk.atPosition(0);

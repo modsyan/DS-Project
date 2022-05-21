@@ -148,7 +148,7 @@ public:
         return cnt;
     }
 
-    int search(int value)
+    int search(T value)
     {
         Node<T> *cur = head;
         int cnt = -1;
@@ -162,89 +162,45 @@ public:
         return -1;
     }
 
+    int pop() {
 
-    // void deleteFirst();
-    // void deleteByValue(T value);
-    // void deleteByIndex(int index);
+        if(!head)
+            return -1;
+        Node<T> *tmp = head;
+        head = head->next;
+        head->prev = NULL;
+        delete tmp;
+        return 1;
+    }
 
+    int popBack() {
+        if (!head)
+            return -1;
+        Node<T> *tmp = tail;
+        tail = tail->prev;
+        tail->next = NULL;
+        delete tmp;
+        return 1;
+    }
 
+    int deleteByIndex(int index)
+    {
+        if (!head || index > size() || index < 0) return -1;
+        if (index == 0){pop(); return 1;}
+        if (index == size()-1) {popBack(); return 1;}
 
+        Node<T> *tpr = head, *tmp;
+        while (--index)
+            tpr = tpr->next;
+        tmp = tpr->next;
+        tpr->next->next->prev = tpr;
+        tpr->next = tpr->next->next;
+        delete tmp;
+    }
 
-// template <typename T>
-// void LinkedList<T>::deleteFirst()
-// {
-//     Node *temp = head;
-//     if (isempty())
-//         cout << "Sorry, The lst is empty";
-//     else
-//     {
-//         head = temp->next;
-//         delete temp;
-//         cout << "Num had Deleted\n";
-//         diplay();
-//     }
-// }
+    int deleteByValue(T value)
+    {   
+        return deleteByIndex(search(value));
+    }
 
-// template <typename T>
-// void LinkedList<T>::deleteByValue(T value)
-// {
-
-//     if (isfound(value))
-//     {
-//         Node *temp = head->next;
-//         Node *tpr = head;
-//         if (tpr->data == value)
-//         {
-//             deleteFirst();
-//         }
-//         else
-//         {
-//             while (temp != NULL && temp->data != value)
-//             {
-//                 temp = temp->next;
-//                 tpr = tpr->next;
-//             }
-//             tpr->next = temp->next;
-//             delete temp;
-//             cout << "Num had Deleted\n";
-//             diplay();
-//         }
-//     }
-//     else
-//         cout << "Sorry, The Item is not found!";
-// }
-// template <typename T>
-// void deleteByIndex(T index)
-// {
-//     if (isempty())
-//     {
-//         cout << "The lst is empty..";
-//     }
-//     else
-//     {
-//         if (index > counter() || index < 1)
-//             cout << "sorry the Index out of range! ";
-//         else
-//         {
-//             Node *temp = head->next;
-//             Node *tpr = head;
-//             if (index == 1)
-//             {
-//                 deleteFirst();
-//             }
-//             else
-//             {
-//                 for (int i = 2; i <= (index - 1); i++)
-//                 {
-//                     temp = temp->next;
-//                     tpr = tpr->next;
-//                 }
-//                 tpr->next = temp->next;
-//                 delete temp;
-//                 cout << "The Index had Deleted\n";
-//                 diplay();
-//             }
-//         }
-//     }
-// }
 };
