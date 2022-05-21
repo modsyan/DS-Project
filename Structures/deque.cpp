@@ -2,14 +2,14 @@
 using namespace std;
 // push_back (done)
 // push_front (done)
-// pop_front
+// pop_front (done)
 // pop_back
 // getback (done)
 // getfront (done)
 // erase
-// clear
+// clear (done)
 // isempty (done)
-// find
+// search (done)
 // display (done)
 class Node
 {
@@ -87,6 +87,69 @@ public:
     int getBack()
     {
         return tail->data;
+    }
+    void popFront()
+    {
+        if (isEmpty())
+        {
+            cout << "Nothing here" << endl;
+        }
+        else if (head == tail)
+        {
+            delete head;
+            head = tail = NULL;
+        }
+        else
+        {
+            Node *temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+    void popBack()
+    {
+        if (isEmpty())
+        {
+            cout << "Nothing here" << endl;
+        }
+        else if (head == tail)
+        {
+            delete head;
+            head = tail = NULL;
+        }
+        else
+        {
+            Node *temp = head;
+        }
+    }
+
+    void clear()
+    {
+        if (isEmpty())
+            cout << "The list is aready empty.." << endl;
+
+        else
+        {
+            while (!isEmpty())
+            {
+                popFront();
+            }
+        }
+    }
+    bool search(int value)
+    {
+        Node *temp = head;
+        while (temp != NULL)
+        {
+            if (temp->data == value)
+                return true;
+            else
+                temp = temp->next;
+        }
+        return false;
+    }
+    void erase()
+    {
     }
 };
 
