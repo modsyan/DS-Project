@@ -6,7 +6,7 @@ using namespace std;
 // pop_back
 // getback (done)
 // getfront (done)
-// erase
+// erase (done)
 // clear (done)
 // isempty (done)
 // search (done)
@@ -148,8 +148,30 @@ public:
         }
         return false;
     }
-    void erase()
+    void erase(int item)
     {
+        Node *delptr = head;
+        if (isEmpty())
+        {
+            cout << "List is empty , no items to delete \n";
+        }
+        else if (head->data == item)
+        {
+            head = head->next;
+            delete delptr;
+        }
+        else
+        {
+            Node *prev = NULL;
+            delptr = head;
+            while (delptr->data != item)
+            {
+                prev = delptr;
+                delptr = delptr->next;
+            }
+            prev->next = delptr->next;
+            delete delptr;
+        }
     }
 };
 
@@ -161,5 +183,9 @@ int main()
     q.pushFront(3);
     q.pushBack(5);
     q.pushBack(6);
+    q.disPlay();
+    q.erase(4);
+    q.disPlay();
+    q.popBack();
     q.disPlay();
 }
