@@ -163,7 +163,6 @@ public:
     }
 
     int pop() {
-
         if(!head)
             return -1;
         Node<T> *tmp = head;
