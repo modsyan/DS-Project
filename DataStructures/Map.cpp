@@ -78,7 +78,7 @@ public:
         return 0;
     }
 
-    pairs<k, v> search(k key)
+    pairs<k, v> *search(k key)
     {
         if (!head)
             return NULL;
