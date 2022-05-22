@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Palindrome.h"
+#include "..\DataStructures\"
 
 using namespace std;
 
