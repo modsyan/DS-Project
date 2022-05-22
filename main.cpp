@@ -1,9 +1,8 @@
 #include <iostream>
+#include "DataStructures\Stack.cpp"
 using namespace std;
 
 int main()
 {
-    cout << "rr";
-    cout << "rr";
-    cout << "rr";
+    Stack<char> stk
 }
