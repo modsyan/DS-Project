@@ -17,18 +17,18 @@ int main()
         case 1:
         {
             cout << "Name: "; cin >> tmpName; 
-            cout << "\nPhone: "; cin >> tmpPhone; 
+            cout << "Phone: "; cin >> tmpPhone; 
             Contacts.insert(tmpName, tmpPhone);
             break;
         }
         case 2:
         {
-            cout << "Enter Name want to deleted";
+            cout << "Enter Name want to deleted\n";
             cin >> tmpName;
             if (Contacts.remove(tmpName) == 0)
-                cout << "Name not Found";
+                cout << "Name not Found\n";
             else
-                cout << "Success..";
+                cout << "Success..\n";
             break;
         }
         case 3:
@@ -37,9 +37,9 @@ int main()
             cin >> tmpName;
             pairs<string, string> *con = Contacts.search(tmpName);
             if (!con)
-                cout << "Not Found";
+                cout << "Not Found\n";
             else
-                cout << "Name: " << con->key << " Phone: " << con->value;
+                cout << "Name: " << con->key << " Phone: " << con->value << '\n';
             break;
         }
         case 4:
@@ -49,6 +49,15 @@ int main()
             cout << "\n------------------------\n";
             break;
         }
+        case 5:
+        {
+            cout << "\nAll Contacts Has been removed\n";
+            Contacts.distroy();
+            Contacts.display();
+            cout << '\n';
+            break;
+        }
+
         default:
             break;
         }

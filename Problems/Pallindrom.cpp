@@ -4,9 +4,9 @@ using namespace std;
 
 int main()
 {
+    cout << "Enter Word: ";
     string word; cin >> word;
     Stack<char> stack;
-    
     for (int i = 0; i < word.size(); i++)
         stack.push(word[i]);
 

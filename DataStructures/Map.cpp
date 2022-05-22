@@ -104,14 +104,25 @@ public:
         }
     }
 
-    string allMap()
+    void distroy()
     {
-        string res = "";
-        pairs<k, v> *cur = head;
-        while (head)
+        pairs<k, v> *cur = head, *tmp;
+        while(cur)
         {
-            res += "Key: " + cur->key + " Value: " + cur->value + '\n';
+            tmp = cur;
             cur = cur->Next;
+            delete tmp;
         }
     }
+
+    // string allMap()
+    // {
+    //     string res = "";
+    //     pairs<k, v> *cur = head;
+    //     while (head)
+    //     {
+    //         res += "Key: " + cur->key + " Value: " + cur->value + '\n';
+    //         cur = cur->Next;
+    //     }
+    // }
 };
