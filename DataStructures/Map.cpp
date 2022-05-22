@@ -1,29 +1,31 @@
 #include <iostream>
 using namespace std;
 
-template <class K, class V>
+template <class k, class v>
 struct pairs
 {
-    K key;
-    V value;
-    pairs<K, V> *Next = NULL;
-    pairs<K, V> *Prev = NULL;
+    k key;
+    v value;
+    pairs<k, v> *Next = NULL;
+    pairs<k, v> *Prev = NULL;
 };
 
-template <class K, class V>
+template <class k, class v>
 class Map
 {
-public:
-    pairs<K, V> *head, *tail;
 
-    Map<K, V>()
+public:
+    pairs<k, v> *head;
+    pairs<k, v> *tail;
+
+    Map<k, v>()
     {
         head = tail = NULL;
     }
 
-    void insert(K key, V value)
+    void insert(k key, v value)
     {
-        pairs<K, V> *newPairs = new pairs<K, V>;
+        pairs<k, v> *newPairs = new pairs<k, v>;
         newPairs->key = key;
         newPairs->value = value;
 
@@ -34,58 +36,82 @@ public:
             tail->Next = newPairs;
             newPairs->Prev = tail;
             tail = newPairs;
+            tail->Next = NULL;
         }
     }
 
-    int remove(K key)
+    int remove(k key)
     {
         if (!head)
             return 0;
-        pairs<K, V> *it = head;
 
-        if(it->key = key)
+        if(head->key == key)
         {
-            pairs<K, V> tmp = it;
-            it = it->Next;
-            it->Prev = NULL;
+            pairs<k, v> *tmp = head;
+            head = head->Next;
             delete tmp;
             return 1;
         }
-        while (it->Next->key != key && it)
-            it = it->Next;
-        if(!it)
-            return 0;
 
-        pairs<K, V> *tmp = it->Next;
-        it->Next->Next->Prev = it;
-        it->Next = it->Next->Next;
-        delete tmp;
-        return 1;
+        if(tail->key == key)
+        {
+            pairs<k, v> *tmp = tail;
+            tail = tail->Prev;
+            tail->Next = NULL;
+            delete tmp;
+            return 1;
+        }
+
+        pairs<k, v> *it = head;
+        while (it)
+        {
+            if (it->Next->key == key)
+            {
+                pairs<k, v> *tmp = it->Next;
+                it->Next->Next->Prev = it;
+                it->Next = it->Next->Next;
+                delete tmp;
+                return 1;
+            }
+            it = it->Next;
+        }
+        return 0;
     }
 
-    int search(K key)
+    pairs<k, v> search(k key)
     {
+        if (!head)
+            return NULL;
+        pairs<k, v> *cur = head;
+        while(cur)
+            if(cur->key == key)
+                return cur;
+        return NULL;
     }
 
     void display()
     {
-        pairs<K, V> *cur = head;
-        while(head)
+        if (!head)
+            cout << "empty...\n";
+        else
         {
-            cout << "Key: " <<cur->key << " Value: " <<cur->value << endl;
+            pairs<k, v> *cur = head;
+            while(cur)
+            {
+                cout << "Key: " <<cur->key << " Value: " <<cur->value << endl;
+                cur = cur->Next;
+            }
+        }
+    }
+
+    string allMap()
+    {
+        string res = "";
+        pairs<k, v> *cur = head;
+        while (head)
+        {
+            res += "Key: " + cur->key + " Value: " + cur->value + '\n';
             cur = cur->Next;
         }
     }
 };
-
-
-int main()
-{
-    Map<int, int> map;
-    map.insert(1001, 1);
-    map.insert(1002, 11);
-    map.insert(1003, 111);
-    map.remove(1003);
-    map.insert(1004, 1111);
-    map.display();
-}
